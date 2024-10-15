@@ -31,6 +31,7 @@
      CREATE DATABASE my_database;
      ```
 
+alternatively you can install XAMPP/WAMP
 ---
 
 ### Linux (Ubuntu/Debian)
