@@ -108,92 +108,21 @@ The configuration and setup steps from here on are **the same** for both Windows
    php artisan migrate
    ```
 
-### Step 3: Install Inertia.js, React, and Vite
+### Step 3: Install Breeze with Inertia, react and vite
 
-1. **Install Inertia.js**:
+1. **Install laravel/breeze**:
+   
+   ```bash
+   composer require larvel/breeze --dev
+   ```
+
+2. **Install React, Vite, and other dependencies using breeze**:
 
    ```bash
-   composer require inertiajs/inertia-laravel
+   php artisan breeze:install
+   # select react
    ```
 
-2. **Install React, Vite, and other dependencies**:
-
-   ```bash
-   npm install @inertiajs/inertia @inertiajs/inertia-react @inertiajs/progress react react-dom
-   ```
-
-3. **Install Vite (Laravel 9+ uses Vite by default)**:
-
-   ```bash
-   npm install
-   ```
-
-### Step 4: Configure Vite
-
-1. Open the `vite.config.js` file and configure Vite to work with Laravel and React:
-
-   ```javascript
-   import { defineConfig } from 'vite';
-   import react from '@vitejs/plugin-react';
-   import { resolve } from 'path';
-
-   export default defineConfig({
-     plugins: [react()],
-     resolve: {
-       alias: {
-         '@': resolve(__dirname, 'resources/js'),
-       },
-     },
-     server: {
-       hmr: {
-         host: 'localhost',
-       },
-     },
-   });
-   ```
-
-### Step 5: Set Up Inertia.js with React
-
-1. Set up Inertia.js and React in `resources/js/app.js`:
-
-   ```javascript
-   import { createInertiaApp } from '@inertiajs/inertia-react';
-   import { InertiaProgress } from '@inertiajs/progress';
-   import { render } from 'react-dom';
-
-   createInertiaApp({
-       resolve: name => require(`./Pages/\${name}`).default,
-       setup({ el, App, props }) {
-           render(<App {...props} />, el);
-       },
-   });
-
-   InertiaProgress.init();
-   ```
-
-2. Define your routes in `routes/web.php` to render React components via Inertia:
-
-   ```php
-   use Inertia\Inertia;
-
-   Route::get('/', function () {
-       return Inertia::render('Home');
-   });
-   ```
-
-3. Create a simple `Home.jsx` React component in `resources/js/Pages/Home.jsx`:
-
-   ```javascript
-   const Home = () => {
-       return (
-           <div>
-               <h1>Welcome to Inertia.js with React!</h1>
-           </div>
-       );
-   }
-
-   export default Home;
-   ```
 
 ### Step 6: Compile Assets and Run the Application
 
@@ -213,10 +142,3 @@ Now, navigate to `http://127.0.0.1:8000` in your browser, and you’ll see your 
 
 ---
 
-## Node.js Ecosystem Overview
-
-- **Node.js**: JavaScript runtime for running server-side code.
-- **npm**: Node package manager that installs JavaScript libraries.
-- **Vite**: Fast build tool and development server used to compile and bundle React components.
-
-With this setup, you can now develop a full-stack SPA using **Laravel** for the backend and **React** with **Inertia.js** for the frontend in a single project!
