@@ -21,17 +21,17 @@ To add PHP, Node.js, Composer, and MySQL to the Windows Path, you need their ins
 - PHP: `C:\laragon\bin\php\php-[version]`
 - Node.js: `C:\laragon\bin\nodejs`
 - Composer: `C:\laragon\bin\composer`
-- MySQL: `C:\laragon\bin\mysql\mysql-[version]`
+- MySQL: `C:\laragon\bin\mysql\mysql-[version]\bin`
 
 ### Step 3: Add Paths to Environment Variables
 1. Open **Control Panel** > **System** > **Advanced System Settings**.
 2. Click on the **Environment Variables** button.
 3. Under **System variables**, scroll and find **Path**, then click **Edit**.
 4. Add new entries for PHP, Node.js, Composer, and MySQL:
-    - Add: `C:\laragon\bin\php\php-version`
+    - Add: `C:\laragon\bin\php\php-[version]`
     - Add: `C:\laragon\bin\nodejs`
     - Add: `C:\laragon\bin\composer`
-    - Add: `C:\laragon\bin\mysql\mysql-version`
+    - Add: `C:\laragon\bin\mysql\mysql-[version]\bin`
 5. Save changes.
 
 ### Step 4: Verify Paths
