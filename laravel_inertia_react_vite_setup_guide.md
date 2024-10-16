@@ -1,145 +1,93 @@
 
-# Setup Guide: Laravel + Inertia.js + React + Vite + MySQL
+# Setting up Laragon, PHP, Node.js, Composer, and MySQL on Windows with Laravel, Breeze, and Inertia (React)
 
-## 1. Installation Instructions
+## 1. Install Laragon
 
-### Windows
+### Step 1: Download Laragon
+- Visit [https://laragon.org/](https://laragon.org/) and download the full version of Laragon.
 
-1. **Install PHP**:
-   - Download PHP from [php.net](https://www.php.net/downloads) and follow the Windows installation guide.
-   - Add PHP to your system `PATH` during installation.
+### Step 2: Install Laragon
+- Run the installer and follow the instructions to install Laragon.
+- Open Laragon after installation.
 
-2. **Install Composer**:
-   - Download and install Composer from [getcomposer.org](https://getcomposer.org/download/).
-   - Verify installation:
-     ```bash
-     composer -V
-     ```
+## 2. Add PHP, Node.js, Composer, and MySQL to the Windows Path
 
-3. **Install Node.js and npm**:
-   - Download Node.js from [nodejs.org](https://nodejs.org/). Install the LTS version.
-   - Verify installation:
-     ```bash
-     node -v
-     npm -v
-     ```
-
-4. **Install MySQL**:
-   - Download MySQL from [mysql.com](https://dev.mysql.com/downloads/installer/).
-   - Set up a root password and create a new database:
-     ```sql
-     CREATE DATABASE my_database;
-     ```
-
-alternatively you can install XAMPP/WAMP
----
-
-### Linux (Ubuntu/Debian)
-
-1. **Install PHP**:
-   ```bash
-   sudo apt update
-   sudo apt install php php-cli php-mbstring php-xml php-zip php-mysql
-   ```
-
-2. **Install Composer**:
-   ```bash
-   curl -sS https://getcomposer.org/installer | php
-   sudo mv composer.phar /usr/local/bin/composer
-   ```
-
-3. **Install Node.js and npm**:
-   ```bash
-   sudo apt install nodejs npm
-   ```
-
-   Verify installation:
-   ```bash
-   node -v
-   npm -v
-   ```
-
-4. **Install MySQL**:
-   ```bash
-   sudo apt install mysql-server
-   sudo mysql_secure_installation
-   ```
-
-   Create a new database:
-   ```sql
-   CREATE DATABASE my_database;
-   ```
-
----
-
-## 2. Laravel + Inertia.js + React + Vite Configuration
-
-The configuration and setup steps from here on are **the same** for both Windows and Linux.
-
-### Step 1: Create a New Laravel Project
-
-1. Open your terminal/command prompt and run the following to create a new Laravel project:
-
-   ```bash
-   composer create-project laravel/laravel my-laravel-app
-   ```
-
-2. Navigate into the project directory:
-
-   ```bash
-   cd my-laravel-app
-   ```
-
-### Step 2: Set Up MySQL Database
-
-1. Open the `.env` file in the project directory and update the database connection details to match your MySQL credentials:
-
-   ```bash
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=my_database
-   DB_USERNAME=root
-   DB_PASSWORD=your_password
-   ```
-
-2. Run Laravel migrations to create the necessary database tables:
-
-   ```bash
-   php artisan migrate
-   ```
-
-### Step 3: Install Breeze with Inertia, react and vite
-
-1. **Install laravel/breeze**:
-   
-   ```bash
-   composer require larvel/breeze --dev
-   ```
-
-2. **Install React, Vite, and other dependencies using breeze**:
-
-   ```bash
-   php artisan breeze:install
-   # select react
-   ```
+Laragon comes with PHP, Node.js, Composer, and MySQL pre-installed, but we need to ensure they are available in the system's environment variables (PATH).
 
 
-### Step 6: Compile Assets and Run the Application
+### Step 2: Find Paths
+Click menu > tools > path > manage path
+To add PHP, Node.js, Composer, and MySQL to the Windows Path, you need their installation paths. These are typically located inside the Laragon directory:
+- PHP: `C:\laragon\bin\php\php-[version]`
+- Node.js: `C:\laragon\bin\nodejs`
+- Composer: `C:\laragon\bin\composer`
+- MySQL: `C:\laragon\bin\mysql\mysql-[version]`
 
-1. **Run Vite** for hot module replacement (HMR) during development:
+### Step 3: Add Paths to Environment Variables
+1. Open **Control Panel** > **System** > **Advanced System Settings**.
+2. Click on the **Environment Variables** button.
+3. Under **System variables**, scroll and find **Path**, then click **Edit**.
+4. Add new entries for PHP, Node.js, Composer, and MySQL:
+    - Add: `C:\laragon\bin\php\php-version`
+    - Add: `C:\laragon\bin\nodejs`
+    - Add: `C:\laragon\bin\composer`
+    - Add: `C:\laragon\bin\mysql\mysql-version`
+5. Save changes.
 
-   ```bash
-   npm run dev
-   ```
+### Step 4: Verify Paths
+- Open a new terminal (Command Prompt or PowerShell) and run the following commands to check if they are correctly installed:
+    ```bash
+    php -v
+    node -v
+    composer -v
+    mysql --version
+    ```
 
-2. **Serve the Laravel application**:
+## 3. Create a New Laravel Application
 
-   ```bash
-   php artisan serve
-   ```
+### Step 1: Create a Laravel Project
+- Run the following command to create a new Laravel project:
+    ```bash
+    composer create-project --prefer-dist laravel/laravel your-laravel-app
+    ```
 
-Now, navigate to `http://127.0.0.1:8000` in your browser, and you’ll see your Laravel app running with Inertia.js, React, and Vite!
+### Step 2: Navigate to Your Laravel Application Directory
+- Navigate to your Laravel project directory:
+    ```bash
+    cd your-laravel-app
+    ```
 
----
+### Step 3: Install Breeze
+- Install Laravel Breeze:
+    ```bash
+    composer require laravel/breeze --dev
+    ```
 
+- Run the Breeze installation command for Inertia with React:
+    ```bash
+    php artisan breeze:install react
+    ```
+
+### Step 4: Install Node Dependencies and Compile Assets
+- Install Node.js dependencies and compile your assets:
+    ```bash
+    npm install
+    npm run dev
+    ```
+
+### Step 5: Migrate the Database
+- Run migrations to set up the database tables:
+    ```bash
+    php artisan migrate
+    ```
+
+### Step 6: Serve Your Application
+- Run the following command to serve your Laravel application:
+    ```bash
+    php artisan serve
+    ```
+
+Your Laravel application with Breeze and Inertia (React) should now be up and running!
+
+## 4. Access Your Application
+- Open your browser and go to `http://localhost:8000` to view the Laravel application.
